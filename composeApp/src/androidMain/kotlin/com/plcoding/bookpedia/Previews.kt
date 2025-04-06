@@ -1,22 +1,31 @@
 package com.plcoding.bookpedia
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import com.plcoding.bookpedia.book.presentation.book_list.components.BookSearchBar
 
-@Preview()
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.plcoding.bookpedia.book.domain.Book
+import com.plcoding.bookpedia.book.presentation.book_list.BookListScreen
+import com.plcoding.bookpedia.book.presentation.book_list.BookListState
+
+private val books = (1 .. 20).map{
+    Book(
+        id = it.toString(),
+        title = "Book $it",
+        imageUrl = "https://asdfasdf.com",
+        authors = listOf("Pedro"),
+        description = "Desc $it",
+        averageRating = 4.4534,
+        publishYear = null
+    )
+}
+
+@Preview
 @Composable
-fun BookSearchPreview(modifier: Modifier = Modifier) {
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .background(Color.White)) {
-        BookSearchBar("", {}, {},
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
+private fun BookListScreenPreview() {
+    BookListScreen(
+        state = BookListState(
+            searchResults = books
+        ),
+        onAction = { }
+    )
 }
