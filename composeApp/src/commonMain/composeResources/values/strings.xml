@@ -12,4 +12,10 @@
     <string name="error_serialization">Oops, something went wrong!</string>
     <string name="error_too_many_request">Oops, something went wrong!</string>
     <string name="error_no_search_results">Oops, something went wrong!</string>
+    <string name="book_cover">Book cover</string>
+    <string name="rating">Rating</string>
+    <string name="pages">pages</string>
+    <string name="languages">Languages</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="description_unavailable">Description not available.</string>
 </resources>

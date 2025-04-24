@@ -198,7 +198,7 @@ fun BookListScreen( state:BookListState, onAction: (BookListAction) -> Unit) {
                                                     onAction(BookListAction.OnBookClick(it))
                                                 },
                                                 modifier = Modifier.fillMaxSize(),
-                                                scroolState = searchResultState
+                                                scrollState = searchResultState
                                             )
                                         }
                                     }

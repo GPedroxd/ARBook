@@ -88,7 +88,7 @@ kotlin {
 
 android {
     namespace = "com.plcoding.bookpedia"
-    compileSdk = 34
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.plcoding.bookpedia"

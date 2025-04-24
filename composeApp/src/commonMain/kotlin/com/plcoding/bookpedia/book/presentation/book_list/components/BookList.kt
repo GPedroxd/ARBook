@@ -18,11 +18,11 @@ import com.plcoding.bookpedia.book.domain.Book
 fun BookList(
     books: List<Book>,
     onBookClick: (Book) -> Unit,
-    scroolState: LazyListState = rememberLazyListState(),
+    scrollState: LazyListState = rememberLazyListState(),
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        state = scroolState,
+        state = scrollState,
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally

@@ -30,7 +30,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -75,11 +74,12 @@ fun BookListItem(
                 val painter = rememberAsyncImagePainter(
                     model = book.imageUrl,
                     onSuccess = {
+                        imageLoadResult =
                         if(it.painter.intrinsicSize.width > 1
                             && it.painter.intrinsicSize.height> 1){
                             Result.success(it.painter)
                         } else {
-                            Result.failure(Exception("Invalid imaga size"))
+                            Result.failure(Exception("Invalid image size"))
                         }
                     },
                     onError = {
@@ -120,9 +120,9 @@ fun BookListItem(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                book.authors.firstOrNull()?.let{ authername ->
+                book.authors.firstOrNull()?.let{ authorName ->
                     Text(
-                        text = authername,
+                        text = authorName,
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
