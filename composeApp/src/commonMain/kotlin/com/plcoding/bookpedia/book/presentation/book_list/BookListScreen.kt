@@ -49,13 +49,13 @@ import org.koin.compose.viewmodel.koinViewModel
 fun BookListScreenRoot(
     viewModel: BookListViewModel = koinViewModel(),
     onBookClick: (Book) -> Unit
-){
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     BookListScreen(
         state = state,
         onAction = { action ->
-            when(action){
+            when (action) {
                 is BookListAction.OnBookClick -> onBookClick(action.book)
                 else -> Unit
             }
@@ -65,37 +65,23 @@ fun BookListScreenRoot(
 }
 
 @Composable
-fun BookListScreen( state:BookListState, onAction: (BookListAction) -> Unit) {
+fun BookListScreen(state: BookListState, onAction: (BookListAction) -> Unit) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val pagerState = rememberPagerState { 2 }
     val searchResultState = rememberLazyListState()
 
-    LaunchedEffect(state.searchResults){
+    LaunchedEffect(state.searchResults) {
         searchResultState.animateScrollToItem(0)
     }
 
     Column(
-        modifier =  Modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(DarkBlue)
             .statusBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        BookSearchBar(
-            searchQuery = state.searchQuery,
-            onSearchQueryChange = {
-                onAction(BookListAction.OnSearchQueryChange(it))
-            },
-            onImeSearch = {
-                keyboardController?.hide()
-            },
-            modifier = Modifier
-                .widthIn(max = 400.dp)
-                .fillMaxWidth()
-                .padding(16.dp)
-        )
-
-        Surface (
+    ) {
+        Surface(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
@@ -104,66 +90,16 @@ fun BookListScreen( state:BookListState, onAction: (BookListAction) -> Unit) {
                 topStart = 32.dp,
                 topEnd = 32.dp
             )
-        ){
+        ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TabRow(
-                    selectedTabIndex = state.selectedTabIndex,
-                    modifier = Modifier
-                        .padding(vertical = 12.dp)
-                        .widthIn(max = 700.dp)
-                        .fillMaxWidth(),
-                    containerColor = DesertWhite,
-                    indicator = { tabPositions ->
-                        TabRowDefaults.SecondaryIndicator(
-                            color = SandYellow,
-                            modifier = Modifier
-                                .tabIndicatorOffset(tabPositions[state.selectedTabIndex])
-                        )
-                    }
-                ){
-                    Tab(
-                        selected = state.selectedTabIndex == 0,
-                        onClick = {
-                            onAction(BookListAction.OnTabSelected(0))
-                        },
-                        modifier = Modifier.weight(1f),
-                        selectedContentColor = SandYellow,
-                        unselectedContentColor = Color.Black.copy(alpha = 0.5f),
-                    ){
-                        Text(
-                            text = stringResource(Res.string.search_result),
-                            modifier = Modifier
-                                .padding( vertical = 12.dp)
-                        )
-                    }
-
-                    Tab(
-                        selected = state.selectedTabIndex == 1,
-                        onClick = {
-                            onAction(BookListAction.OnTabSelected(1))
-                        },
-                        modifier = Modifier.weight(1f),
-                        selectedContentColor = SandYellow,
-                        unselectedContentColor = Color.Black.copy(alpha = 0.5f)
-                    ){
-                        Text(
-                            text = stringResource(Res.string.favorites),
-                            modifier = Modifier
-                                .padding( vertical = 12.dp)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(4.dp))
-
                 HorizontalPager(
                     state = pagerState,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                ){ pageIndex ->
+                ) { pageIndex ->
                     Box(
                         modifier = Modifier
                             .fillMaxSize(),
@@ -171,10 +107,10 @@ fun BookListScreen( state:BookListState, onAction: (BookListAction) -> Unit) {
                     ) {
                         when (pageIndex) {
                             0 -> {
-                                if(state.isLoading){
+                                if (state.isLoading) {
                                     CircularProgressIndicator()
-                                }else{
-                                    when{
+                                } else {
+                                    when {
                                         state.errorMessage != null -> {
                                             Text(
                                                 text = state.errorMessage.asString(),
@@ -183,6 +119,7 @@ fun BookListScreen( state:BookListState, onAction: (BookListAction) -> Unit) {
                                                 color = MaterialTheme.colorScheme.error
                                             )
                                         }
+
                                         state.searchResults.isEmpty() -> {
                                             Text(
                                                 text = stringResource(Res.string.no_search_results),
@@ -191,6 +128,7 @@ fun BookListScreen( state:BookListState, onAction: (BookListAction) -> Unit) {
                                                 color = MaterialTheme.colorScheme.error
                                             )
                                         }
+
                                         else -> {
                                             BookList(
                                                 books = state.searchResults,
