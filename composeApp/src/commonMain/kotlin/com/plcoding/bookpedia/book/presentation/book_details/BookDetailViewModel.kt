@@ -17,7 +17,7 @@ class BookDetailViewModel: ViewModel() {
                 }
             }
             is BookDetailAction.OnFavoriteClick -> {
-
+                //todo: download book content and save it to the local storage and add book to the list of reading books
             }
             else -> Unit
         }

@@ -122,7 +122,7 @@ private fun BookDetailScreen(
                     ) {
                         BookChip {
                             Text(
-                                text = "132"
+                                text = state.book.numPages.toString()
                             )
                         }
                     }

@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -40,6 +41,8 @@ import androidx.compose.ui.unit.dp
 import cmp_bookpedia.composeapp.generated.resources.Res
 import cmp_bookpedia.composeapp.generated.resources.book_cover
 import cmp_bookpedia.composeapp.generated.resources.book_error_2
+import cmp_bookpedia.composeapp.generated.resources.download_24dp
+import cmp_bookpedia.composeapp.generated.resources.download_done_24dp
 import coil3.compose.rememberAsyncImagePainter
 import com.plcoding.bookpedia.core.presentation.DarkBlue
 import com.plcoding.bookpedia.core.presentation.DesertWhite
@@ -163,7 +166,7 @@ fun BlurredImageBackground(
                                         .background(
                                             brush = Brush.radialGradient(
                                                 colors = listOf(
-                                                    SandYellow,
+                                                    Color.Black,
                                                     Color.Transparent
                                                 ),
                                                 radius = 70f
@@ -171,12 +174,12 @@ fun BlurredImageBackground(
                                         )
                                 ){
                                     Icon(
-                                        imageVector = if(isFavorite) {
-                                            Icons.Filled.Favorite
+                                        painter = if(isFavorite) {
+                                            painterResource(Res.drawable.download_done_24dp)
                                         }else{
-                                            Icons.Outlined.FavoriteBorder
+                                            painterResource(Res.drawable.download_24dp)
                                         },
-                                        tint = Color.Red,
+                                        tint = Color.White,
                                         contentDescription = null
                                     )
                                 }

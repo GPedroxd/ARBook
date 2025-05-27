@@ -15,7 +15,8 @@ private val books = (1 .. 20).map{
         authors = listOf("Pedro"),
         description = "Desc $it",
         averageRating = 4.4534,
-        publishYear = null
+        publishYear = null,
+        numPages =  123
     )
 }
 

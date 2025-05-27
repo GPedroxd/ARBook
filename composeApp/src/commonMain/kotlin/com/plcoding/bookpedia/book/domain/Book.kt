@@ -7,5 +7,6 @@ data class Book(
     val authors: List<String>,
     val description: String?,
     val publishYear: String?,
-    val averageRating: Double?
+    val averageRating: Double?,
+    val numPages: Int
 )
